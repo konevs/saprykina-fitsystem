@@ -378,6 +378,79 @@
     @media (max-width: 640px) {
       .hero-h1 { font-size: clamp(38px, 12vw, 70px) !important; }
     }
+
+    /* ── iPhone frame ── */
+    .iphone-frame-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .iphone-frame {
+      position: relative;
+      width: 272px;
+      border-radius: 52px;
+      background: rgba(255,255,255,0.055);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1.5px solid rgba(255,255,255,0.18);
+      box-shadow:
+        0 0 0 1.5px rgba(0,0,0,0.55),
+        inset 0 0 0 1px rgba(255,255,255,0.07),
+        0 36px 90px rgba(0,0,0,0.65),
+        0 0 60px rgba(126,202,234,0.07);
+      padding: 18px 12px 22px;
+    }
+    .iphone-island {
+      width: 90px;
+      height: 28px;
+      background: #000;
+      border-radius: 20px;
+      margin: 0 auto 14px;
+    }
+    .iphone-screen {
+      border-radius: 40px;
+      overflow: hidden;
+      background: #000;
+      aspect-ratio: 9/16;
+      position: relative;
+    }
+    .iphone-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    /* Side button accents */
+    .iphone-frame::before {
+      content: '';
+      position: absolute;
+      right: -3px;
+      top: 110px;
+      width: 3px;
+      height: 64px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 0 4px 4px 0;
+    }
+    .iphone-frame::after {
+      content: '';
+      position: absolute;
+      left: -3px;
+      top: 90px;
+      width: 3px;
+      height: 44px;
+      background: rgba(255,255,255,0.10);
+      border-radius: 4px 0 0 4px;
+      box-shadow: 0 56px 0 rgba(255,255,255,0.10);
+    }
+    @media (max-width: 1023px) {
+      .iphone-frame {
+        width: min(220px, 58vw);
+        border-radius: 40px;
+        padding: 14px 10px 16px;
+      }
+      .iphone-island { width: 72px; height: 22px; margin-bottom: 10px; }
+      .iphone-screen { border-radius: 32px; }
+    }
   </style>
 </head>
 <body>
@@ -664,28 +737,23 @@
   <div class="max-w-6xl mx-auto px-6">
     <div class="grid lg:grid-cols-2 gap-16 items-center">
 
-      <!-- Video placeholder -->
-      <div class="relative rounded-2xl overflow-hidden fade" style="aspect-ratio:16/9;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);">
-        <!-- Subtle grid -->
-        <div class="absolute inset-0" style="background-image:linear-gradient(rgba(255,255,255,0.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.018) 1px,transparent 1px);background-size:40px 40px;" aria-hidden="true"></div>
-        <!-- Vignette -->
-        <div class="absolute inset-0" style="background:radial-gradient(ellipse at center,transparent 40%,rgba(18,18,18,0.7) 100%);" aria-hidden="true"></div>
-        <!-- Play button -->
-        <div class="absolute inset-0 flex items-center justify-center">
-          <button class="play-btn glass w-16 h-16 rounded-full flex items-center justify-center" style="border-color:rgba(255,255,255,0.18);" aria-label="Воспроизвести пример разбора техники">
-            <svg width="18" height="20" viewBox="0 0 18 20" fill="rgba(255,255,255,0.85)" aria-hidden="true">
-              <polygon points="0,0 18,10 0,20"/>
-            </svg>
-          </button>
-        </div>
-        <!-- REC badge -->
-        <div class="absolute top-4 left-4 flex items-center gap-2 glass px-3 py-1.5 rounded-full" style="border-color:rgba(255,255,255,0.09);">
-          <div class="w-1.5 h-1.5 rounded-full bg-red-400/70 animate-pulse" aria-hidden="true"></div>
-          <span class="text-[9px] tracking-widest uppercase text-white/40">Demo · Техника</span>
-        </div>
-        <!-- Duration -->
-        <div class="absolute bottom-4 right-4 glass px-3 py-1 rounded-lg" style="border-color:rgba(255,255,255,0.09);">
-          <span class="text-[10px] text-white/35 font-mono">02:34</span>
+      <!-- iPhone frame with video -->
+      <div class="iphone-frame-wrap fade">
+        <div class="iphone-frame" role="img" aria-label="Видео разбора техники упражнений">
+          <!-- Dynamic island -->
+          <div class="iphone-island" aria-hidden="true"></div>
+          <!-- Screen with video -->
+          <div class="iphone-screen">
+            <video
+              src="technique.mp4"
+              autoplay
+              muted
+              loop
+              playsinline
+              class="iphone-video"
+              aria-label="Демонстрация разбора техники упражнений"
+            ></video>
+          </div>
         </div>
       </div>
 
@@ -696,12 +764,12 @@
           Ваш результат<br>под моим контролем
         </h2>
         <p class="text-[13px] text-white/50 leading-[1.9] mb-10">
-          Пример того, как я разбираю технику упражнений по видео для онлайн-клиентов. Каждое движение разобрано на составляющие — ошибки исправляются точечно, прогресс фиксируется еженедельно.
+          Цифровой анализ биомеханики. Я разбираю каждое ваше движение, чтобы тренировки были на 100% безопасными и эффективными даже удалённо.
         </p>
 
         <div class="space-y-4">
           <div class="flex gap-4 items-start">
-            <div class="w-7 h-7 rounded-full border flex-shrink-0 flex items-center justify-center mt-0.5 flex-shrink-0" style="border-color:rgba(126,202,234,0.2);" aria-hidden="true">
+            <div class="w-7 h-7 rounded-full border flex-shrink-0 flex items-center justify-center mt-0.5" style="border-color:rgba(126,202,234,0.2);" aria-hidden="true">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--accent-dim)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="20,6 9,17 4,12"/>
               </svg>
@@ -1028,7 +1096,7 @@
 
     <div class="flex flex-col sm:flex-row gap-4 justify-center fade fade-d3">
       <!-- Telegram -->
-      <a href="https://t.me/" class="btn-social btn-social-tg" aria-label="Написать в Telegram">
+      <a href="https://t.me/masha140202" target="_blank" rel="noopener noreferrer" class="btn-social btn-social-tg" aria-label="Написать в Telegram @masha140202">
         <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path d="M22 2L11 13" stroke="var(--accent-dim)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="var(--accent-dim)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1036,7 +1104,7 @@
         Telegram
       </a>
       <!-- Instagram -->
-      <a href="https://instagram.com/" class="btn-social" aria-label="Написать в Instagram">
+      <a href="https://instagram.com/__masha.14__" target="_blank" rel="noopener noreferrer" class="btn-social" aria-label="Написать в Instagram __masha.14__">
         <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <rect x="2" y="2" width="20" height="20" rx="5" stroke="rgba(255,255,255,0.32)" stroke-width="1.6"/>
           <circle cx="12" cy="12" r="4" stroke="rgba(255,255,255,0.32)" stroke-width="1.6"/>
@@ -1054,9 +1122,9 @@
   <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
     <p class="text-[11px] font-semibold tracking-[0.22em] uppercase text-white/45">SAPRYKINA FITSYSTEM</p>
     <p class="text-[10px] text-white/22 tracking-wide">© 2026 · Все права защищены</p>
-    <div class="flex gap-6">
-      <a href="https://instagram.com/" class="text-[11px] nav-link">Instagram</a>
-      <a href="https://t.me/"          class="text-[11px] nav-link">Telegram</a>
+    <div class="flex flex-col sm:flex-row gap-3 sm:gap-6 text-center sm:text-left">
+      <span class="text-[11px] text-white/30">Instagram: __masha.14__</span>
+      <span class="text-[11px] text-white/30">Telegram: @masha140202</span>
     </div>
   </div>
 </footer>
